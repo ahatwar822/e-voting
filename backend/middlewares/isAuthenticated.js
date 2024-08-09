@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const isAuthenticated = (req, res, next) => {
+const isAuthenticated = async (req, res, next) => {
     try {
         const token = req.cookies.token;
         if (!token) {
@@ -16,11 +16,11 @@ const isAuthenticated = (req, res, next) => {
                 success: false
             });
         }
-        req.id = decoded.userId;
+        req.id = decoded.userId;  // Make sure 'userId' is correctly being extracted from the token
         next(); 
     } catch (error) {
         console.log(error);
     }
 }
 
-export default isAuthenticated
+export default isAuthenticated;
